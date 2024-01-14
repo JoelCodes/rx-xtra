@@ -2,7 +2,7 @@
 
 `rx-xtra.loop` is part of [`Rx Xtra`](https://github.com/JoelCodes/rx-xtra), a collection of [RxJS](https://rxjs.dev/) utilities.
 
-Created by Joel Shinness [LinkTree](https://linktr.ee/yesthatjoelshinness) [Github](https://github.com/JoelCodes) [Buy me a coffee!](https://ko-fi.com/yesthatjoelshinness)
+Created by Joel Shinness [LinkTree](https://linktr.ee/yesthatjoelshinness) • [Github](https://github.com/JoelCodes) • [Buy me a coffee!](https://ko-fi.com/yesthatjoelshinness)
 
 ## Usage
 
