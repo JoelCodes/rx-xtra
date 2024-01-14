@@ -1,9 +1,14 @@
 {
   "name": "rx-xtra.loop",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "RxJS Loop Function",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": { 
+    "type": "git",
+    "url": "git+https://github.com/JoelCodes/rx-xtra.git",
+    "directory": "packages/loop"
+  },
   "scripts": {
     "build": "tsc"
   },
