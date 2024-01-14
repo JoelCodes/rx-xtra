@@ -1,0 +1,18 @@
+{
+  "name": "rx-xtra.loop",
+  "version": "0.0.0",
+  "description": "RxJS Loop Function",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
