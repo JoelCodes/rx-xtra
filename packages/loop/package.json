@@ -9,6 +9,15 @@
     "url": "git+https://github.com/JoelCodes/rx-xtra.git",
     "directory": "packages/loop"
   },
+  "keywords": [
+    "reactive extensions",
+    "rx",
+    "RxJS",
+    "rxjs",
+    "loop",
+    "operators",
+    "utilities"
+  ],
   "scripts": {
     "build": "tsc"
   },
