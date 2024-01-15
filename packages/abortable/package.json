@@ -1,22 +1,29 @@
 {
-  "name": "rx-xtra.loop",
+  "name": "rx-xtra.abortable",
   "version": "0.0.0",
-  "description": "RxJS Loop Function",
+  "description": "RxJS Abortable Function",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": { 
     "type": "git",
     "url": "git+https://github.com/JoelCodes/rx-xtra.git",
-    "directory": "packages/loop"
+    "directory": "packages/abortable"
   },
   "keywords": [
     "reactive extensions",
     "rx",
     "RxJS",
     "rxjs",
-    "loop",
     "operators",
-    "utilities"
+    "utilities",
+    "AbortController",
+    "AbortController API",
+    "abortcontroller",
+    "AbortSignal",
+    "abortsignal",
+    "abort",
+    "interop",
+    "interoperability"
   ],
   "scripts": {
     "build": "tsc"

@@ -1,13 +1,6 @@
 import { EMPTY, Observable, ObservableInput, RepeatConfig, Subscription, concat, from, ignoreElements, take, timer } from "rxjs"
 
-/**
- * 
- * 
- * @param factory Factory function that returns an ObservableInput<T> given an index.  The index starts at 0 and increments by 1 for each iteration.
- * @param countOrConfig number of iterations to run the loop, or a RepeatConfig object with a count property and possible a delay.  If not provided, the loop will run infinitely.
- * @returns 
- */
-export function loop<T>(factory:(index:number) => ObservableInput<T>, countOrConfig?: number | RepeatConfig):Observable<T>{
+export function loopScan<T>(cb:(state:T, index:number) => ObservableInput<T>, seed:T, countOrConfig?: number | RepeatConfig):Observable<T>{
   let count = Infinity;
   let delay: RepeatConfig['delay'];
   if(typeof countOrConfig === 'number'){
@@ -20,10 +13,12 @@ export function loop<T>(factory:(index:number) => ObservableInput<T>, countOrCon
 
   return new Observable<T>(destination => {
     let index = 0;
+    let current = seed;
     let subscription:Subscription|undefined;
     let observer = {
       next(value:T){
         destination.next(value);
+        current = value;
       },
       error(err:any){
         destination.error(err);
@@ -34,7 +29,7 @@ export function loop<T>(factory:(index:number) => ObservableInput<T>, countOrCon
         if(index >= count) {
           destination.complete();
         } else {
-          const nextObs = from(factory(index));
+          const nextObs = from(cb(current, index));
           const nextWithDelay = typeof delay === 'number' && delay > 0
             ? concat(timer(delay).pipe(ignoreElements()), nextObs)
             : typeof delay === 'function'
@@ -44,7 +39,7 @@ export function loop<T>(factory:(index:number) => ObservableInput<T>, countOrCon
         }
       }
     }
-    subscription = from(factory(0)).subscribe(observer);
+    subscription = from(cb(seed, 0)).subscribe(observer);
     return () => {
       subscription?.unsubscribe();
     };

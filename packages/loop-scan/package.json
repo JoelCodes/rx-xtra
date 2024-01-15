@@ -1,13 +1,13 @@
 {
-  "name": "rx-xtra.loop",
+  "name": "rx-xtra.loop-scan",
   "version": "0.0.0",
-  "description": "RxJS Loop Function",
+  "description": "RxJS Loop Scan Function",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": { 
     "type": "git",
     "url": "git+https://github.com/JoelCodes/rx-xtra.git",
-    "directory": "packages/loop"
+    "directory": "packages/loop-scan"
   },
   "keywords": [
     "reactive extensions",
@@ -15,6 +15,9 @@
     "RxJS",
     "rxjs",
     "loop",
+    "scan",
+    "loopScan",
+    "loop-scan",
     "operators",
     "utilities"
   ],

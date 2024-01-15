@@ -1,15 +1,15 @@
-# Rx Xtra: Loop
+# Rx Xtra: LoopScan
 
-`rx-xtra.loop` is part of [`Rx Xtra`](https://github.com/JoelCodes/rx-xtra), a collection of [RxJS](https://rxjs.dev/) utilities.
+`rx-xtra.loop-scan` is part of [`Rx Xtra`](https://github.com/JoelCodes/rx-xtra), a collection of [RxJS](https://rxjs.dev/) utilities.
 
 Created by Joel Shinness [LinkTree](https://linktr.ee/yesthatjoelshinness) • [Github](https://github.com/JoelCodes) • [Buy me a coffee!](https://ko-fi.com/yesthatjoelshinness)
 
 ## Usage
 
-`loop<T>`
+`loopScan<T>`
 
 * Parameters
-  * `factory`: `(index:number) => ObservableInput<T>` Accepts an index that starts at `0` and increments every repetition.  Returns an [`ObservableInput<T>`](https://rxjs.dev/api/index/type-alias/ObservableInput), e.g. an [`Observable<T>`](https://rxjs.dev/api/index/class/Observable), or anything that can be coerced into an `Observable<T>`, such as an Array, Promise, Iterable, or AsyncIterable.
+  * `factory`: `(state:T, index:number) => ObservableInput<T>` Accepts an index that starts at `0` and increments every repetition.  Returns an [`ObservableInput<T>`](https://rxjs.dev/api/index/type-alias/ObservableInput), e.g. an [`Observable<T>`](https://rxjs.dev/api/index/class/Observable), or anything that can be coerced into an `Observable<T>`, such as an Array, Promise, Iterable, or AsyncIterable.
   * `countOrConfig?`: `number`|[`RepeatConfig`](https://rxjs.dev/api/index/interface/RepeatConfig) Limits how many repetitions are possible, and possibly introduces a delay between repetitions.  If no `count` is specified, the output Observable will never `complete`, though it may `error`.
 * Returns
   * [`Observable<T>`](https://rxjs.dev/api/index/class/Observable)
@@ -25,15 +25,15 @@ If there is a `RepeatConfig` or `number` given as the second parameter, it can l
 
 Observe the following diagram.  If there is a `factory` function that produces the following Observables for the inputs `0`, `1`, and `2`, ...
 
-![Factories](../../diagrams/loop/factories.excalidraw.png)
+![Diagram](./diagrams/factories.excalidraw.png)
 
 Then calling `loop(factory)` would produce this Observable:
 
-![Results](../../diagrams/loop/results.excalidraw.png)
+![Results](./diagrams/results.excalidraw.png)
 
 If one of the inner Observables were to error out, then the output Observable would also error out.
 
-![Errors](../../diagrams/loop/errors.excalidraw.png)
+![Errors](./diagrams/errors.excalidraw.png)
 
 ## Examples
 

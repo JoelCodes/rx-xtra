@@ -1,6 +1,6 @@
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript';
-const packages = ['loop'];
+const packages = ['abortable', 'loop'];
 export default packages.map(pkg => ({
   input: `packages/${pkg}/src/index.ts`,
   output: {
