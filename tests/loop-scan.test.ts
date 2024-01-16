@@ -1,13 +1,12 @@
-import { NEVER, ObservableInput } from "rxjs";
-import { loop } from "../packages/loop/src";
-import { testScheduler } from './utils';
+import { loopScan } from "../packages/loop-scan/";
+import { testScheduler } from "./utils";
 
-describe('loop', () => {
+describe('loopScan', () => {
   describe('factory', () => {
     it('calls the factory function on subscription with a seed value', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = jest.fn((n) => cold('n', { n: n + 1 }));
-        const loop$ = loop(factory);
+        const loop$ = loopScan(factory, 0);
         expectObservable(loop$).toBe('1', { '1': 1 });
       });
     });
@@ -15,7 +14,7 @@ describe('loop', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = jest.fn((n) => cold('ab', { a: n , b: n + 1 }))
           .mockImplementationOnce((n) => cold('ab|', { a: n , b: n + 1 }));
-        const loop$ = loop(factory);
+        const loop$ = loopScan(factory, 0);
         expectObservable(loop$).toBe('0112', [0,1,2]);
       });
     });
@@ -23,7 +22,7 @@ describe('loop', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = jest.fn((n) => cold('a#', { a: n + 1}, "Boo"))
           .mockImplementationOnce((n) => cold('a|', { a: n + 1}, "Boo"));
-        expectObservable(loop(factory)).toBe('01#', [1, 2], "Boo");
+        expectObservable(loopScan(factory, 0)).toBe('01#', [1, 2], "Boo");
       });
     });
   });
@@ -31,21 +30,21 @@ describe('loop', () => {
     it('behaves like EMPTY if the number is 0', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = (n:number) => cold('n',{ n });
-        const loop$ = loop(factory, 0);
+        const loop$ = loopScan(factory, 0, 0);
         expectObservable(loop$).toBe('|');
       });
     });
     it('completes if the loop commpletes `count` iterations', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = jest.fn((n) => cold('n|', { n: n + 1 }));
-        const loop$ = loop(factory, 3);
+        const loop$ = loopScan(factory, 0, 3);
         expectObservable(loop$).toBe('012|', [1,2,3]);
       });
     });
     it('uses the count from the config object', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = jest.fn((n) => cold('n|', { n: n + 1 }));
-        const loop$ = loop(factory, { count: 3 });
+        const loop$ = loopScan(factory, 0, { count: 3 });
         expectObservable(loop$).toBe('012|', [1,2,3]);
       });
     });
@@ -55,7 +54,7 @@ describe('loop', () => {
       testScheduler.run(({ expectObservable, cold }) => {
         const factory = jest.fn((n) => cold('n', { n: n + 1 }))
           .mockImplementationOnce((n) => cold('n|', { n: n + 1 }));
-        const loop$ = loop(factory, { delay: 100 });
+        const loop$ = loopScan(factory, 0, { delay: 100 });
         expectObservable(loop$).toBe('0 100ms 1', [1, 2]);
       });
     });
@@ -67,7 +66,7 @@ describe('loop', () => {
         const delay = jest.fn(() => cold('200ms |'))
           .mockImplementationOnce(() => cold('100ms |'));
 
-        const loop$ = loop(factory, { delay });
+        const loop$ = loopScan(factory, 0, { delay });
         expectObservable(loop$).toBe('0 100ms 1 200ms 2', [1, 2, 3]);
       });
     });
@@ -79,7 +78,7 @@ describe('loop', () => {
         const delay = jest.fn(() => cold('200ms a'))
           .mockImplementationOnce(() => cold('100ms a'));
 
-        const loop$ = loop(factory, { delay });
+        const loop$ = loopScan(factory, 0, { delay });
         expectObservable(loop$).toBe('0 100ms 1 200ms 2', [1, 2, 3]);
       });
     });
@@ -88,7 +87,7 @@ describe('loop', () => {
         const factory = jest.fn((n) => cold('n', { n: n + 1 }))
           .mockImplementationOnce((n) => cold('n|', { n: n + 1 }));
         const delay = jest.fn(() => cold('200ms #', {}, "Boo"));
-        const loop$ = loop(factory, { delay });
+        const loop$ = loopScan(factory, 0, { delay });
         expectObservable(loop$).toBe('0 200ms #', [1], "Boo");
       });
     });
