@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "RxJS AbortController-compatible defer operator",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "repository": { 
     "type": "git",
