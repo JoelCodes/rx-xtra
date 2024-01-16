@@ -13,7 +13,8 @@ export default packages.map(pkg => ({
   plugins: [typescript({
     declaration: true,
     declarationDir: `packages/${pkg}/dist`,
-    include: [`packages/${pkg}/src/**/*.ts`]
+    include: [`packages/${pkg}/src/**/*.ts`],
+    module: 'ESNext'
   })],
   external: ['rxjs']
 }));
