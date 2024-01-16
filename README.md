@@ -12,7 +12,7 @@ This repo encapsulates a number of utilities released as their own npm packages,
 
 * [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=48&v=4)](https://www.npmjs.com/package/rx-xtra.loop)
 * loopScan -- Coming Soon
-* abortable -- Coming Soon
+* deferAbort -- Coming Soon
 
 ### Pipeable Operators
 

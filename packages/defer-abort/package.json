@@ -1,13 +1,13 @@
 {
-  "name": "rx-xtra.abortable",
+  "name": "rx-xtra.defer-abort",
   "version": "0.0.0",
-  "description": "RxJS Abortable Function",
+  "description": "RxJS AbortController-compatible defer operator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": { 
     "type": "git",
     "url": "git+https://github.com/JoelCodes/rx-xtra.git",
-    "directory": "packages/abortable"
+    "directory": "packages/defer-abort"
   },
   "keywords": [
     "reactive extensions",
@@ -23,7 +23,8 @@
     "abortsignal",
     "abort",
     "interop",
-    "interoperability"
+    "interoperability",
+    "abortable"
   ],
   "scripts": {
     "build": "tsc"
