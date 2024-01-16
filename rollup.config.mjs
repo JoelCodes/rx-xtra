@@ -1,5 +1,7 @@
 // rollup.config.js
 import typescript from '@rollup/plugin-typescript';
+import terser from '@rollup/plugin-terser';
+
 const packages = ['defer-abort', 'loop', 'loop-scan'];
 export default packages.map(pkg => ({
   input: `packages/${pkg}/src/index.ts`,
@@ -15,7 +17,7 @@ export default packages.map(pkg => ({
     declarationDir: `packages/${pkg}/dist`,
     include: [`packages/${pkg}/src/**/*.ts`],
     module: 'ESNext'
-  })],
+  }), terser()],
   external: ['rxjs']
 }));
 
