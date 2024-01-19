@@ -10,9 +10,9 @@ This repo encapsulates a number of utilities released as their own npm packages,
 
 ### Creation Operators
 
-* [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=48&v=4)](https://www.npmjs.com/package/rx-xtra.loop)
-* loopScan -- Coming Soon
-* deferAbort -- Coming Soon
+* [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop)
+* [loopScan](./packages/loop-scan/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop-scan)
+* [deferAbort](./packages/defer-abort/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-abort)
 
 ### Pipeable Operators
 

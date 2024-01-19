@@ -1,12 +1,12 @@
-# Rx Xtra: Abortable
+# Rx Xtra: Defer Abort
 
-`rx-xtra.abortable` is part of [`Rx Xtra`](https://github.com/JoelCodes/rx-xtra), a collection of [RxJS](https://rxjs.dev/) utilities.
+`rx-xtra.defer-abort` is part of [`Rx Xtra`](https://github.com/JoelCodes/rx-xtra), a collection of [RxJS](https://rxjs.dev/) utilities.
 
 Created by Joel Shinness [LinkTree](https://linktr.ee/yesthatjoelshinness) • [Github](https://github.com/JoelCodes) • [Buy me a coffee!](https://ko-fi.com/yesthatjoelshinness)
 
 ## Usage
 
-`abortable<T>`
+`deferAbort<T>`
 
 * Parameters
   * `factory`: `(signal:AbortSignal) => ObservableInput<T>` Accepts an [`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) and returns an [`ObservableInput<T>`](https://rxjs.dev/api/index/type-alias/ObservableInput), e.g. an [`Observable<T>`](https://rxjs.dev/api/index/class/Observable), or anything that can be coerced into an `Observable<T>`, such as an Array, Promise, Iterable, or AsyncIterable.
@@ -19,7 +19,6 @@ Abortable allows functions and API's that use the [AbortController API](https://
 ## Examples
 
 ```ts
-
 // This represents some API that uses an AbortSignal to perform cleanup
 // In this case, it ends the loop.
 async function *countUntilAbort(signal:AbortSignal):AsyncIterable<number>{
@@ -31,10 +30,9 @@ async function *countUntilAbort(signal:AbortSignal):AsyncIterable<number>{
     }
     yield i;
   }
-  
 }
 
-abortable(countUntilAbort)
+deferAbort(countUntilAbort)
   .pipe(take(3))
   .subscribe({
     next(val){ console.log('Next', val); },

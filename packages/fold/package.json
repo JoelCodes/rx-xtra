@@ -1,33 +1,35 @@
 {
-  "name": "rx-xtra.loop-scan",
+  "name": "rx-extra.fold",
   "version": "0.0.0",
-  "description": "RxJS Loop Scan Function",
+  "description": "RxJS Fold Function",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  
-  "repository": { 
-    "type": "git",
-    "url": "git+https://github.com/JoelCodes/rx-xtra.git",
-    "directory": "packages/loop-scan"
-  },
-  "keywords": [
-    "reactive extensions",
-    "rx",
-    "RxJS",
-    "rxjs",
-    "loop",
-    "scan",
-    "loopScan",
-    "loop-scan",
-    "operators",
-    "utilities"
-  ],
   "scripts": {
     "build": "tsc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelCodes/rx-xtra.git"
+  },
+  "keywords": [
+    "reactive",
+    "extensions",
+    "rx",
+    "RxJS",
+    "rxjs",
+    "fold",
+    "reduce",
+    "reducers",
+    "operators",
+    "utilities"
+  ],
   "author": "https://github.com/JoelCodes",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoelCodes/rx-xtra/issues"
+  },
+  "homepage": "https://github.com/JoelCodes/rx-xtra#readme",
   "peerDependencies": {
     "rxjs": "^7.8.1"
   },
