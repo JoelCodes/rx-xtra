@@ -10,7 +10,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoelCodes/rx-xtra.git"
+    "url": "git+https://github.com/JoelCodes/rx-xtra.git",
+    "directory": "packages/safe-map"
   },
   "keywords": [
     "reactive",

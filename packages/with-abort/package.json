@@ -1,7 +1,7 @@
 {
-  "name": "rx-extra.fold",
+  "name": "rx-extra.with-abort",
   "version": "0.0.0",
-  "description": "RxJS Fold Function",
+  "description": "RxJS WithAbort Function",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -11,19 +11,25 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JoelCodes/rx-xtra.git",
-    "directory": "packages/fold"
+    "directory": "packages/with-abort"
   },
   "keywords": [
     "reactive",
-    "extensions",
+    "reactive extensions",
     "rx",
     "RxJS",
     "rxjs",
-    "fold",
-    "reduce",
-    "reducers",
     "operators",
-    "utilities"
+    "utilities",
+    "AbortController",
+    "AbortController API",
+    "abortcontroller",
+    "AbortSignal",
+    "abortsignal",
+    "abort",
+    "interop",
+    "interoperability",
+    "abortable"
   ],
   "author": "https://github.com/JoelCodes",
   "license": "ISC",

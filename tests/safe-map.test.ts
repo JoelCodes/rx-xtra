@@ -55,7 +55,7 @@ describe('safeMap', () => {
       obs.next(2);
       expect(onError).not.toHaveBeenCalled();
       expect(observer.next).toHaveBeenCalledWith(3);
-      
+
 
     });
     it('errors out the Observable if the onError throws an error', () => {
