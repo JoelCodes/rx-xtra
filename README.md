@@ -18,7 +18,7 @@ This repo encapsulates a number of utilities released as their own npm packages,
 
 * [fold](./packages/defer-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.fold)
 * [safeMap](./packages/safe-map/) -- Coming Soon
-* withAbort -- Coming Soon
+* [withAbort](./packages/with-abort/) -- Coming Soon
 
 ### React Utilities
 
