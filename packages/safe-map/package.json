@@ -1,0 +1,39 @@
+{
+  "name": "rx-extra.safe-map",
+  "version": "0.0.0",
+  "description": "RxJS SafeMap Function",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelCodes/rx-xtra.git"
+  },
+  "keywords": [
+    "reactive",
+    "extensions",
+    "rx",
+    "RxJS",
+    "rxjs",
+    "map",
+    "error handling",
+    "data validation",
+    "operators",
+    "utilities"
+  ],
+  "author": "https://github.com/JoelCodes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoelCodes/rx-xtra/issues"
+  },
+  "homepage": "https://github.com/JoelCodes/rx-xtra#readme",
+  "peerDependencies": {
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

@@ -11,14 +11,14 @@ describe('Fold', () => {
   });
   it('takes an observable of one value and returns that value', () => {
     testScheduler.run(({ expectObservable, cold }) => {
-      const obs = fold((acc:number, value:number) => acc + value)(cold('a', { a: 1 }));
-      expectObservable(obs).toBe('a', { a: 1 });
+      const obs = fold((acc:number, value:number) => acc + value)(cold('a|', { a: 1 }));
+      expectObservable(obs).toBe('a|', { a: 1 });
     });
   });
   it('takes an observable of multiple values and returns an aggregate of the values', () => {
     testScheduler.run(({ expectObservable, cold }) => {
-      const obs = fold((acc:number, value:number) => acc + value)(cold<number>('012', [1, 2, 3] as Record<number, number>));
-      expectObservable(obs).toBe('012', [1, 3, 6]);
+      const obs = fold((acc:number, value:number) => acc + value)(cold<number>('012|', [1, 2, 3] as Record<number, number>));
+      expectObservable(obs).toBe('012|', [1, 3, 6]);
     });
   });
   it('takes an erroring observable and throws the error', () => {

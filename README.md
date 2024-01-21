@@ -11,12 +11,12 @@ This repo encapsulates a number of utilities released as their own npm packages,
 ### Creation Operators
 
 * [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop)
-* [loopScan](./packages/loop-scan/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop-scan)
-* [deferAbort](./packages/defer-abort/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-abort)
+* [loopScan](./packages/loop-scan/) [![rx-xtra.loop-scan on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop-scan)
+* [deferAbort](./packages/defer-abort/) [![rx-xtra.defer-abort on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-abort)
 
 ### Pipeable Operators
 
-* fold -- Coming Soon
+* [fold](./packages/defer-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.fold)
 * safeMap -- Coming Soon
 * withAbort -- Coming Soon
 
