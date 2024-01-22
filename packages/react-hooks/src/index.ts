@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Subject, ReplaySubject, TimestampProvider, BehaviorSubject, Subscription } from 'rxjs';
+import { Subject, BehaviorSubject, Subscription } from 'rxjs';
 
 export function useSubject<T>(){
   const subject = useRef<Subject<T>>();
