@@ -1,4 +1,3 @@
-// rollup.config.js
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 
@@ -7,17 +6,17 @@ export default packages.map(pkg => ({
   input: `packages/${pkg}/src/index.ts`,
   output: [{
     file: `packages/${pkg}/dist/index.mjs`,
-    format: 'es'
+    format: 'es',
   }, {
     file: `packages/${pkg}/dist/index.js`,
-    format: 'cjs'
+    format: 'cjs',
   }],
   plugins: [typescript({
     declaration: true,
     declarationDir: `packages/${pkg}/dist`,
     include: [`packages/${pkg}/src/**/*.ts`],
-    module: 'ESNext'
-  })],
-  external: ['rxjs', 'react']
+    module: 'ESNext',
+  }), terser()],
+  external: ['rxjs', 'react'],
 }));
 
