@@ -11,7 +11,7 @@ describe('Fold', () => {
   });
   it('takes an observable of one value and returns that value', () => {
     testScheduler.run(({expectObservable, cold}) => {
-      const obs = fold((acc: number, value: number) => acc + value)(cold('a|', [1] as {[k in number]: number}));
+      const obs = fold((acc: number, value: number) => acc + value)(cold('0|', [1] as {[k in number]: number}));
       expectObservable(obs).toBe('0|', [1]);
     });
   });
@@ -25,6 +25,13 @@ describe('Fold', () => {
     testScheduler.run(({expectObservable, cold}) => {
       const obs = fold((acc: number, value: number) => acc + value)(cold('0#', [1] as {[k in number]: number}, 'Boo'));
       expectObservable(obs).toBe('0#', [1], 'Boo');
+    });
+  });
+  it('calls the reducer with an increasing index', () => {
+    testScheduler.run(({expectObservable, cold}) => {
+      const reducer = jest.fn((_acc: number, _value: number, index: number) => index);
+      const obs = fold(reducer)(cold('012|', [5, 6, 7] as {[k in number]: number}));
+      expectObservable(obs).toBe('012|', [5, 1, 2]);
     });
   });
 });

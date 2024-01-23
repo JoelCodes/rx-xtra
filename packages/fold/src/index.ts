@@ -1,14 +1,17 @@
 import {EmptyError, type MonoTypeOperatorFunction, Observable} from 'rxjs';
 
-export function fold<T>(reducer: (acc: T, value: T) => T): MonoTypeOperatorFunction<T> {
+
+export function fold<T>(reducer: (acc: T, value: T, index:number) => T): MonoTypeOperatorFunction<T> {
   return source => new Observable<T>(destination => {
     let current: T | undefined;
+    let index = 0;
     const observer = {
       next(value: T) {
         current = value;
         destination.next(value);
+
         observer.next = (value: T) => {
-          current = reducer(current!, value);
+          current = reducer(current!, value, ++index);
           destination.next(current);
         };
 

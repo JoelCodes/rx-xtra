@@ -13,17 +13,22 @@ This repo encapsulates a number of utilities released as their own npm packages,
 * [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop)
 * [loopScan](./packages/loop-scan/) [![rx-xtra.loop-scan on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop-scan)
 * [deferAbort](./packages/defer-abort/) [![rx-xtra.defer-abort on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-abort)
+* [deferOf](./packages/defer-of) -- Coming Soon!
 
 ### Pipeable Operators
 
-* [fold](./packages/defer-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.fold)
-* [safeMap](./packages/safe-map/) -- Coming Soon
-* [withAbort](./packages/with-abort/) -- Coming Soon
+* [fold](./packages/defer-abort/) -- Coming Soon!
+* [safeMap](./packages/safe-map/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.safe-map)
+* [withAbort](./packages/with-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.with-abort)
 
 ### React Utilities
 
-* useBehavior -- Coming Soon
-* useSubscription -- Coming Soon
+* [react-hooks](./packages/react-hooks/) A collection of React Hooks that help sync Observables with React component lifecycles
+  * `useSubscribe` - Syncs an RxJS Subscription lifetime to React lifecycles.
+  * `useObserve` - Creates a stateful Observable that watches React states and props.
+  * `useObserveChanges` - Creats an Observable of changes to React states and props.
+  * `useSubject` - A Subject that is created on mount on completed on unmount
+  * `useBehaviorSubject`- A BehaviorSubject (i.e. a stateful Subject) that is created on mount and completed on unmount
 
 ## Contributing
 

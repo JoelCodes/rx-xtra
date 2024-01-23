@@ -91,12 +91,81 @@ fibLoopScan(5).subscribe(console.log);
 // 5
 ```
 
-### Chains
+### End with State
+
 The biggest boon for me was being able to create a few of these factories, which I'd call "chains", and choose between them.  I'll even use the following type throughout some of these apps:
 
 ```ts
 type Chain<T, TArg extends T = T> = (state:TArg) => ObservableInput<T>;
 ```
+
+So, if it's only the last emitted value of one of our generated Observables that will be passed to the next iteration, then one cool use case is this: we can emit whatever values we want, as long as our last emitted value represents the state of our chain.
+
+Imagine this scenario:  I'm working on an app that is getting streaming data through a websocket connection.  Unfortunately, it's flaky or poorly configured, so it's not very reliable..  There's an HTTP API endpoint that will get me the data I need, but it should be used sparingly.  Yes, we should fix the backend, but that's another team that won't take my calls, so I come up with some rules to use the WebSocket carefully, retrying as I go:
+
+1. If I try to connect to the websocket and it fails, I'll immediately try to reconnect up to 3 times.  If it still fails, I'll poll the HTTP API endpoint once every 2 seconds for about 5 minutes, then start the whole thing over.
+2. If I manage to connect to the websocket for longer than a minute, I'll consider that a success, and reset my "failure count" to 0 before trying step 1.
+
+Step 1 on it's own could be written like this:
+
+```ts
+function connectToWs():Observable<Message>{ /* */ }
+function queryAjax():Promise<Message>{ /* */ }
+
+const connectionWithRetries = connectToWs().pipe(
+  retry(3),
+  concatWith(interval(2 * 1000).pipe(
+    switchMap(() => queryAjax()),
+    takeUntil(timer(5 * 60 * 1000))
+  )),
+  repeat()
+)
+```
+
+But to get step 2 working, I need to be a little more clever.  So I'll make a couple of "chains" that end with a connection state:
+
+```ts
+type ConnectionState = { failureCount: number, startTimeMs: number }
+
+function tryToConnectToWs({ failureCount, start }:ConnectionState):Observable<Message|ConnectionState>{
+  return connectToWs().pipe(
+    catchError(() => EMPTY), // Squelch Errors
+    concatWith(defer(() => {
+      const now = Date.now();
+      const newCount = (now - startTime < 60 * 1000) ? failureCount + 1 : 0;
+      return of({
+        start: now,
+        failureCount: newCount
+      })
+    }))
+  )
+}
+
+function pollAjax():Observable<Message|ConnectionState>{
+  return interval(2 * 1000).pipe(
+    switchMap(() => queryAjax()),
+    takeUntil(timer(5 * 60 * 1000)),
+    concatWith(defer(() => of({start: Date.now(), failureCount: 0})))
+  )
+}
+```
+
+Then I'll use `loopScan` to combine them together, filtering out the states at the end.
+
+```ts
+function finalChain(state:ConnectionState|Message):ObservableInput<ConnectionState|Message>{
+  // For the typechecker
+  if(isMessage(state)) return throwError('Somehow a message got through.');
+  if(state.failureCount >= 3) return pollAjax();
+  return tryToConnectToWs(state)
+}
+
+const connectionWithRetries = loopScan(finalChain).pipe(filter(isMessage))
+```
+
+### Chains
+
+Let's say I'm using RxJS on its own to create an app.  No frameworks, no state libraries.  Ben Lesh himself would probably advise against it, but let's say that's what we're doing.  Well, these chains can be a very powerful way of describing and composing these effects.
 
 For instance, I've used RxJS to build a 2048 game, and created different chains to represent the different stages of the game:
 
@@ -162,7 +231,7 @@ const theWholeGame = loopScan((state:GameState):Observable<GameState> => {
 }, {status: 'TITLE_SCREEN', topScore: 0})
 ```
 
-Now, each chain is written on its own.
+So, if you're in a jam, and using RxJS to orchestrate everything, writing chains can be very powerful; and if you're looking for a function to compose your chains, I recommend `loopScan`!
 
 ## See Also
 
