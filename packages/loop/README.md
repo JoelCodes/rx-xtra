@@ -1,5 +1,9 @@
 # Rx Xtra: Loop
 
+`loop` creates an RxJS Observable from a callback, calling it with an index so you know how many repetitions have already elapsed.  It combines the lazy instantiation and coercion of [`defer`](https://rxjs.dev/api/index/function/defer) with the repetition control of [`repeat`](https://rxjs.dev/api/index/function/repeat).
+
+`loop` is great when you want to repeat a process and know which repetition you're on.  Paginated results is probably the best use case.
+
 `rx-xtra.loop` is part of [`Rx Xtra`](https://github.com/JoelCodes/rx-xtra), a collection of [RxJS](https://rxjs.dev/) utilities.
 
 Created by Joel Shinness [LinkTree](https://linktr.ee/yesthatjoelshinness) • [Github](https://github.com/JoelCodes) • [Buy me a coffee!](https://ko-fi.com/yesthatjoelshinness)
@@ -38,6 +42,9 @@ If one of the inner Observables were to error out, then the output Observable wo
 ## Examples
 
 ```ts
+import { loop } from 'rx-xtra.loop';
+import { takeWhile } from 'rxjs/operators';
+
 type DbRow = { /* Some Data Type */ }
 
 async function getPageOfResults(pageStart:number, pageSize:number):Promise<DbRow[]>{
@@ -55,3 +62,11 @@ function getPages(pageSize:number){
   );
 }
 ```
+
+## See Also
+
+* Got an Observable-like thing you want to "coerce" into a real Observable?  Use [`from`](https://rxjs.dev/api/index/function/from)!
+* Like being able to convert Observable-like things into real Observables, and like waiting until Subscription to do so, but you don't need the repetition aspect?  Use [`defer`](https://rxjs.dev/api/index/function/defer)!
+* Have an existing Observable that you want to subscribe to over and over?  Use [`repeat`](https://rxjs.dev/api/index/function/repeat)!
+* Like everything about `loop`, but you don't need the index?  Then you can combine the last two like this: `defer(factory).pipe(repeat(countOrConfig))` 
+* Like `loop`, but you have some some state to pass between repetitions?  Then take a look at [`rx-xtra.loop-scan`](https://www.npmjs.com/package/rx-xtra.loop-scan)!
