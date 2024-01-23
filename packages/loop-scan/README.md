@@ -38,44 +38,47 @@ The worst part of RxJS is that there are always new functions you can write for 
 
 But it's a spicy pepper.  Proceed with caution.
 
-### Iteration in Functional Programming
+### State without Statefulness in Functional Programming
 
-If you've ever studied FP languages, you may have experienced how any iteration can be written as a tail recursion.  For instance, the fibonacci sequence can be written with this iteration:
+If you've ever studied FP languages, you've probably run into its chief promise: no mutable state.  Instead of holding on to state, all data is passed as an argument to a function or returned from a function.  For instance, here's the iterative version of the fibonacci sequence, which updates the `a`, `b`, and `remaining` state on each iteration:
 
 ```ts
-function fibIter(n:number){
-  let a = 1, b = 1, remaining = n;
-  for(let a = 1, b = 1; remaining > 0;){
+function *fibIter(n:number){
+  for(let a = 1, b = 1, remaining = n; remaining > 0;){
     [a, b, remaining] = [b, a + b, remaining - 1];
+    yield a;
   }
-  return a;
 }
 ```
 
 There is a corresponding way to write this with functions, where, instead of mutating state, we pass the state as an argument to a looping function.
 
 ```ts
-function fibRec(n:number){
-  function fibRecInnerLoop(a:number, b:number, n:number){
-    if(n <= 0) return a;
-    return fibRecInnerLoop(b, a + b, n - 1);
+function *fibRec(n:number){
+  function *fibRecInnerLoop(a:number, b:number, n:number){
+    if(n <= 0) return;
+    yield a;
+    yield *fibRecInnerLoop(b, a + b, n - 1);
   }
 
-  return fibRecInnerLoop(1, 1, n);
+  yield *fibRecInnerLoop(1, 1, n);
 }
 ```
 
-This is such a great example of how FP actually accomplishes its mission of abolishing state.  But Since we don't have [tail call optimization](https://en.wikipedia.org/wiki/Tail_call) in JavaScript, it's more efficient to use the stateful version, since the program will basically save all those states on the stack if we use the functional version.
+This is a great example how FP actually accomplishes its mission of abolishing state.  But we don't have [tail call optimization](https://en.wikipedia.org/wiki/Tail_call) in JavaScript, so the stateful version is more efficient than the stateless version.  After all the stateless version will store all the intermediate states on the stack, possibly causing a stack overflow along the way, but definitely using up memory.
 
-But we get a lot from Observables by using this method of looping.  In my personal coding, I found it was a great way of defining a repetitive process, but still keeping the ongoing state of something in mind.  Here's that fibonacci example again:
+But there's still a beauty and elegance to writing stateless code, partially because stateless functions can be reused and re-assembled without triggering crazy side effects, and because they're Here's that fibonacci example again:
 
 ```ts
 function fibLoopScan(n:number){
   return loopScan(
     ([a, b]) => of([b, a + b]), 
-    [1, 1], 
-    {count: n, startWithSeed: true}
-  ).pipe(map(([a]) => a));
+    [1, 1],
+    { startWithSeed: true }
+  ).pipe(
+    map(([a]) => a),
+    take(n)
+  );
 }
 
 fibLoopScan(5).subscribe(console.log);
@@ -86,7 +89,6 @@ fibLoopScan(5).subscribe(console.log);
 // 2
 // 3
 // 5
-// 8
 ```
 
 ### Chains

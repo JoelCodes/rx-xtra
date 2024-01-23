@@ -93,4 +93,27 @@ describe('loopScan', () => {
       });
     });
   });
+  describe('startWithSeed', () => {
+    it('starts with the seed value if `startWithSeed` is true', () => {
+      testScheduler.run(({expectObservable, cold}) => {
+        const factory = (_n:number) => cold<number>('-');
+        const loop$ = loopScan(factory, 0, {startWithSeed: true});
+        expectObservable(loop$).toBe('0', [0]);
+      });
+    });
+    it('does not start with the seed value if `startWithSeed` is false', () => {
+      testScheduler.run(({expectObservable, cold}) => {
+        const factory = (n:number) => cold<number>('a', {a: n + 1});
+        const loop$ = loopScan(factory, 0, {startWithSeed: false});
+        expectObservable(loop$).toBe('0', [1]);
+      });
+    });
+    it('only emits the seed value if `startWithSeed` is true and the count < 0', () => {
+      testScheduler.run(({expectObservable, cold}) => {
+        const factory = (_n:number) => cold<number>('-');
+        const loop$ = loopScan(factory, 0, {startWithSeed: true, count: -1});
+        expectObservable(loop$).toBe('(0|)', [0]);
+      });
+    });
+  });
 });

@@ -1,4 +1,8 @@
-import {EMPTY, Observable, type ObservableInput, type RepeatConfig, type Subscription, concat, from, ignoreElements, take, timer} from 'rxjs';
+import {EMPTY, Observable, type ObservableInput, type RepeatConfig, type Subscription, concat, from, ignoreElements, take, timer, of} from 'rxjs';
+
+export type LoopScanConfig = RepeatConfig & {
+  startWithSeed?: boolean;
+}
 
 /**
  * Creates an Observable that from a repeated factory function, passing the last emitted value to the next iteration.
@@ -58,18 +62,24 @@ import {EMPTY, Observable, type ObservableInput, type RepeatConfig, type Subscri
  * @param countOrConfig number of iterations to run the loop, or a RepeatConfig object with a count property and possible a delay.  If not provided, the loop will run until error or unsubscribe.
  * @returns Observable of state values
  */
-export function loopScan<T>(factory: (state: T, index: number) => ObservableInput<T>, seed: T, countOrConfig?: number | RepeatConfig): Observable<T> {
+export function loopScan<T>(
+  factory: (state: T, index: number) => ObservableInput<T>, 
+  seed: T, 
+  countOrConfig?: number | LoopScanConfig): Observable<T> {
+
   let count = Infinity;
   let delay: RepeatConfig['delay'];
+  let startWithSeed = false;
   if (typeof countOrConfig === 'number') {
     count = countOrConfig;
   } else if (typeof countOrConfig === 'object') {
     count = countOrConfig.count ?? Infinity;
     delay = countOrConfig.delay;
+    startWithSeed = countOrConfig.startWithSeed ?? false;
   }
 
   if (count <= 0) {
-    return EMPTY;
+    return startWithSeed ? of(seed) : EMPTY;
   }
 
   return new Observable<T>(destination => {
@@ -100,6 +110,9 @@ export function loopScan<T>(factory: (state: T, index: number) => ObservableInpu
         }
       },
     };
+    if(startWithSeed) {
+      destination.next(seed);
+    }
     subscription = from(factory(seed, 0)).subscribe(observer);
     return () => {
       subscription?.unsubscribe();
