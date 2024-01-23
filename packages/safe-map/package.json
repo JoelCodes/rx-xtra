@@ -23,7 +23,9 @@
     "error handling",
     "data validation",
     "operators",
-    "utilities"
+    "utilities",
+    "zod",
+    "parsers"
   ],
   "author": "https://github.com/JoelCodes",
   "license": "ISC",
