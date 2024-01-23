@@ -109,7 +109,7 @@ describe('React Hooks', () => {
       const {
         result,
         rerender,
-      } = renderHook(deps => useObserve(deps), {
+      } = renderHook((deps:[number]) => useObserve(deps), {
         initialProps: [1],
       });
       const observable = result.current;

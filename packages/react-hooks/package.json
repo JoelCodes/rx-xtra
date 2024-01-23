@@ -1,17 +1,28 @@
 {
-  "name": "react-hooks",
-  "version": "1.0.0",
-  "description": "",
+  "name": "rx-xtra.react-hooks",
+  "version": "0.0.0",
+  "description": "React Hooks for RxJS Interoperability",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "module": "dist/index.mjs",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+  "keywords": [
+    "reactive extensions",
+    "rx",
+    "RxJS",
+    "rxjs",
+    "reactive",
+    "react",
+    "hooks",
+    "interop",
+    "utilities"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.2.48"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "rxjs": "^7.8.1"
   }
 }
