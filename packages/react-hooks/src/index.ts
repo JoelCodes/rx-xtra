@@ -1,5 +1,5 @@
 import {useRef, useEffect} from 'react';
-import {Subject, BehaviorSubject, type Subscription} from 'rxjs';
+import {Subject, BehaviorSubject, type Subscription, type Observable} from 'rxjs';
 
 export function useSubject<T>() {
   const subject = useRef<Subject<T>>();
@@ -28,6 +28,10 @@ export function useBehaviorSubject<T>(initialVal: T) {
 export function useObserve<Deps extends any[]>(deps: Deps) {
   const subject = useBehaviorSubject<Deps>(deps);
   const isFirst = useRef(true);
+  const observableRef = useRef<Observable<Deps>>();
+  if (!observableRef.current) {
+    observableRef.current = subject.asObservable();
+  }
   useEffect(() => {
     if (isFirst.current) {
       isFirst.current = false;
@@ -36,7 +40,7 @@ export function useObserve<Deps extends any[]>(deps: Deps) {
 
     subject.next(deps);
   }, deps);
-  return subject;
+  return observableRef.current;
 }
 
 export function useSubscribe(cb: () => Subscription, deps: any[] = []) {

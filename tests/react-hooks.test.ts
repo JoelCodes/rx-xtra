@@ -1,6 +1,6 @@
 import {useBehaviorSubject, useObserve, useSubject, useSubscribe} from '../packages/react-hooks';
 import {renderHook} from '@testing-library/react';
-import {Subject, BehaviorSubject, type Subscription, NEVER} from 'rxjs';
+import {Subject, BehaviorSubject, type Subscription, NEVER, Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 /**
  * @jest-environment jsdom
@@ -73,53 +73,59 @@ describe('React Hooks', () => {
     });
   });
   describe('useObserve', () => {
-    it('returns a BehaviorSubject', () => {
+    it('returns an Observable', () => {
       const {
         result,
       } = renderHook(() => useObserve([1]));
-      expect(result.current).toBeInstanceOf(BehaviorSubject);
+      expect(result.current).toBeInstanceOf(Observable);
       const next = jest.fn();
       result.current.subscribe(next);
       expect(next).toHaveBeenCalledWith([1]);
-      expect(result.current.value).toEqual([1]);
     });
-    it('returns the same BehaviorSubject on subsequent calls', () => {
+    it('returns the same Observable on subsequent calls', () => {
       const {
         result,
         rerender,
       } = renderHook(() => useObserve([1]));
-      const subject = result.current;
+      const observable = result.current;
       rerender();
-      expect(result.current).toBe(subject);
+      expect(result.current).toBe(observable);
     });
-    it('completes the BehaviorSubject on unmount', () => {
+    it('completes the Observable on unmount', () => {
       const {
         result,
         unmount,
       } = renderHook(() => useObserve([1]));
-      const subject = result.current;
+      const observable = result.current;
       const complete = jest.fn();
-      subject.subscribe({
+      observable.subscribe({
         complete,
       });
       expect(complete).not.toHaveBeenCalled();
       unmount();
       expect(complete).toHaveBeenCalled();
     });
-    it('emits changes the BehaviorSubject when the deps change', () => {
+    it('emits changes to the Observable when the deps change', () => {
       const {
         result,
         rerender,
       } = renderHook(deps => useObserve(deps), {
         initialProps: [1],
       });
-      const subject = result.current;
+      const observable = result.current;
       const next = jest.fn();
-      subject.subscribe(next);
+      observable.subscribe(next);
       expect(next).toHaveBeenCalledWith([1]);
+
+      // Make sure it doesn't emit when the deps don't change.
+      next.mockClear();
+      rerender([1]);
+      expect(next).not.toHaveBeenCalled();
+
+      // Make sure it does emit when the deps do change.
       rerender([2]);
       expect(next).toHaveBeenCalledWith([2]);
-      expect(result.current).toBe(subject);
+      expect(result.current).toBe(observable);
     });
   });
   describe('useSubscribe', () => {
