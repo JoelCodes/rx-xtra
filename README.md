@@ -4,9 +4,11 @@ More Utility Operators for [RxJS](https://rxjs.dev/)
 
 ## About the Library
 
-I love RxJS, but there are a few operators that I often reach for that aren't part of the core library.  In other libraries, I'd be pestering the maintainers to add them, but this is RxJS!  There's no need to change the library, when we can just create functions, and if they're just functions, they can be released in their own packages!
+I love RxJS, but there are a few operators that I often reach for that aren't part of the core library.  In other libraries, I'd be pestering the maintainers to add them, but this is RxJS!  There's no need to change the library, when we can just create functions, and if they're just functions, they can be released in their own packages, á la Lodash!
 
-This repo encapsulates a number of utilities released as their own npm packages, á la Lodash.
+This repo is my personal collection of utilities, so if it's in here, I've used it in some project at some time, whether I was doing that project for love or for money.  Some of them are as simple as a chisel, and some of them are as dangerous as a table saw, and some as esoteric as a Japanese rasp saw.  Some of them are very broad in their scope, and some are very specific to a framework, runtime, or coding purpose.
+
+I hope they help you with your projects, or at least teach you something about how RxJS works.  I know they've taught me.
 
 ### Creation Operators
 
