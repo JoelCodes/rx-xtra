@@ -19,7 +19,6 @@ I hope they help you with your projects, or at least teach you something about h
 
 ### Pipeable Operators
 
-* [fold](./packages/defer-abort/) -- Coming Soon!
 * [safeMap](./packages/safe-map/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.safe-map)
 * [withAbort](./packages/with-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.with-abort)
 

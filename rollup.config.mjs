@@ -1,7 +1,7 @@
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 
-const packages = ['defer-abort', 'defer-of', 'fold', 'loop', 'loop-scan', 'react-hooks', 'safe-map', 'with-abort'];
+const packages = ['defer-abort', 'defer-of', 'loop', 'loop-scan', 'react-hooks', 'safe-map', 'with-abort'];
 export default packages.map(pkg => ({
   input: `packages/${pkg}/src/index.ts`,
   output: [{
