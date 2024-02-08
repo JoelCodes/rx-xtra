@@ -34,3 +34,5 @@ rules:
     - error
     - varsIgnorePattern: '^_'
       argsIgnorePattern: '^_'
+  'react/react-in-jsx-scope':
+    - off

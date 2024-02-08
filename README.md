@@ -12,15 +12,15 @@ I hope they help you with your projects, or at least teach you something about h
 
 ### Creation Operators
 
-* [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop)
-* [loopScan](./packages/loop-scan/) [![rx-xtra.loop-scan on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop-scan)
-* [deferAbort](./packages/defer-abort/) [![rx-xtra.defer-abort on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-abort)
-* [deferOf](./packages/defer-of) -- Coming Soon!
+* [loop](./packages/loop/) [![rx-xtra.loop on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop) Like [`repeat`](https://rxjs.dev/api/index/function/repeat), but you get know what repetition you're on.
+* [loopScan](./packages/loop-scan/) [![rx-xtra.loop-scan on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.loop-scan) Like loop, but you can pass state between repetitions.
+* [deferAbort](./packages/defer-abort/) [![rx-xtra.defer-abort on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-abort) Allows you to turn a function that uses the AbortController API into an Observable.
+* [deferOf](./packages/defer-of) --[![rx-xtra.defer-of on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.defer-of) Like [`defer`](https://rxjs.dev/api/index/function/repeat), but it creates an Observable of just one value.
 
 ### Pipeable Operators
 
-* [safeMap](./packages/safe-map/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.safe-map)
-* [withAbort](./packages/with-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.with-abort)
+* [safeMap](./packages/safe-map/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.safe-map) Parse and validate incoming data in just one step.  Pairs great with [Zod](https://www.npmjs.com/package/zod).
+* [withAbort](./packages/with-abort/) [![rx-xtra.fold on NPM](https://avatars.githubusercontent.com/u/6078720?s=16&v=4)](https://www.npmjs.com/package/rx-xtra.with-abort) Allows you to trigger Observable cleanup with an AbortSignal.
 
 ### React Utilities
 
