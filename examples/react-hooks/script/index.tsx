@@ -7,9 +7,13 @@ import { UseSubjectDemo } from './useSubject.demo';
 
 function App(){
   return <>
+    <h1>Rx Xtra React Hooks</h1>
     <UseSubscribeDemo/>
+    <hr/>
     <UseObserveDemo/>
+    <hr/>
     <UseObserveChangesDemo/>
+    <hr/>
     <UseSubjectDemo/>
   </>;
 }

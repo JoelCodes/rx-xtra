@@ -5,7 +5,6 @@ import { Observable, Observer } from 'rxjs';
 function ObserverEnd({output}:{output:Observer<string>}){
   const [line, setLine] = useState<string>('');
   return <td>
-    <h3>Observer End</h3>
     <p>
       <input type='text' value={line} onChange={({target:{value}}) => { setLine(value); }}/>
       <button onClick={() => {
@@ -25,7 +24,6 @@ function ObservableEnd({input$}:{input$:Observable<string>}){
   ])));
 
   return <td>
-    <h3>Observable End</h3>
     <pre>
       {lines.join('\n')}
     </pre>
@@ -38,6 +36,10 @@ export function UseSubjectDemo(){
   return <div>
     <h2><code>useSubject</code> Demo</h2>
     <table>
+      <tr>
+        <th>Observer End</th>
+        <th>Observable End</th>
+      </tr>
       <tr>
         <ObserverEnd output={subj}/>
         <ObservableEnd input$={subj}/>
